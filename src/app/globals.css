@@ -1,0 +1,21 @@
+:root {
+  --main-blue-light: #32abf2;
+  --main-blue-faded: #5d7fa3;
+  --typography-blue-dark: #4f637d;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

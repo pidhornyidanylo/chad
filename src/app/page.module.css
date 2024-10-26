@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.leftProgress {
+  width: 40%;
+  background: linear-gradient(
+    270deg,
+    rgba(13, 50, 81, 1) 0%,
+    rgba(25, 71, 108, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightForm {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
