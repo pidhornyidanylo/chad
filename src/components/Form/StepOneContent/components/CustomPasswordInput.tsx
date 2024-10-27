@@ -71,6 +71,9 @@ export const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
             position: 'absolute',
             bottom: '-30px',
             color: 'red',
+            '@media (max-width: 576px)': {
+              bottom: '-20px',
+            },
           }}
           variant='caption'
         >

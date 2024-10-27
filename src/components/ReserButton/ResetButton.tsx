@@ -1,5 +1,6 @@
 'use client';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
 import React from 'react';
 
 export const reset = () => {
@@ -17,13 +18,37 @@ const ResetButton = () => {
     window.location.reload();
   };
   return (
-    <Button
-      onClick={() => handleFormReset()}
-      variant='outlined'
-      sx={{ position: 'fixed', top: '10px', right: '10px' }}
-    >
-      Reset
-    </Button>
+    <>
+      <Button
+        onClick={() => handleFormReset()}
+        variant='outlined'
+        sx={{
+          position: 'fixed',
+          top: '10px',
+          right: '10px',
+          '@media (max-width: 576px)': {
+            display: 'none',
+          },
+        }}
+      >
+        Reset
+      </Button>
+      <IconButton
+        color='primary'
+        aria-label='reload'
+        onClick={() => handleFormReset()}
+        sx={{
+          position: 'fixed',
+          top: '10px',
+          right: '10px',
+          '@media (min-width: 576px)': {
+            display: 'none',
+          },
+        }}
+      >
+        <ReplayIcon />
+      </IconButton>
+    </>
   );
 };
 

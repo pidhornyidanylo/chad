@@ -17,7 +17,9 @@ const Greeting = () => {
         alignItems: 'center',
       }}
     >
-      <Typography variant='h3'>Hello Luna Edge, My name is Danylo! </Typography>
+      <Typography variant='h3' sx={{ fontSize: '2em', textAlign: 'center' }}>
+        Hello Luna Edge, My name is Danylo!{' '}
+      </Typography>
     </div>
   );
 };

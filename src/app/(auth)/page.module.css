@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
 }
@@ -25,4 +25,22 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 1200px) {
+  .leftProgress {
+    width: 0%;
+    display: none;
+  }
+
+  .rightForm {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .rightForm {
+    background: none;
+    display: block;
+  }
 }

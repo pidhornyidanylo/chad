@@ -11,6 +11,7 @@ import { FormValues } from '../StepOneContent';
 import toast from 'react-hot-toast';
 import SuccessForm from '../reusable/SuccessForm';
 import AlternativeRequest from '../reusable/AlternativeRequest';
+import Progress from '@/components/Progress/Progress';
 
 type StepThreeContentProps = {
   showLoading: boolean;
@@ -81,6 +82,16 @@ const BasicForm: React.FC<BasicFormProps> = ({
         <Typography sx={{ color: '#20496C', fontWeight: 600 }} variant='h4'>
           Chad
         </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'none',
+          '@media(max-width: 576px)': {
+            display: 'block',
+          },
+        }}
+      >
+        <Progress />
       </Box>
       <Typography
         sx={{

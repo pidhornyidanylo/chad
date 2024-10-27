@@ -7,6 +7,7 @@ import { FormContext } from '@/store/FormContext';
 import { useContext } from 'react';
 import { CustomPasswordInput } from './components/CustomPasswordInput';
 import { CustomFormControl } from './components/CustomFormControl';
+import Progress from '@/components/Progress/Progress';
 
 export type FormValues = {
   email: string;
@@ -33,11 +34,27 @@ export const StepOneContent: React.FC<StepOneContentProps> = ({
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+        }}
+      >
         <Image width={32} height={32} src={ChadLogo} alt='logo' />
         <Typography sx={{ color: '#20496C', fontWeight: 600 }} variant='h4'>
           Chad
         </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: 'none',
+          '@media(max-width: 576px)': {
+            display: 'block',
+          },
+        }}
+      >
+        <Progress />
       </Box>
       <Typography
         sx={{

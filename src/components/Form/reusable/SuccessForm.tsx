@@ -12,7 +12,7 @@ const SuccessForm: React.FC<SuccessFormProps> = ({
   return (
     <>
       <Image
-        style={{ display: 'block', margin: 'auto' }}
+        style={{ display: 'block', margin: '0 auto' }}
         src={CheckMark}
         alt={'check-mark'}
       />
@@ -22,6 +22,9 @@ const SuccessForm: React.FC<SuccessFormProps> = ({
           color: '#20496C',
           fontWeight: 500,
           textAlign: 'center',
+          '@media (max-width: 576px)': {
+            marginTop: '12px',
+          },
         }}
         variant='h5'
       >

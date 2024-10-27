@@ -7,6 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import { connectStoreStepListData } from '../data';
 import SuccessForm from '../../reusable/SuccessForm';
 import AlternativeRequest from '../../reusable/AlternativeRequest';
+import Progress from '@/components/Progress/Progress';
 
 type InitNotConnectedStoreProps = {
   showLoading: boolean;
@@ -68,6 +69,7 @@ const BasicForm = ({
           Chad
         </Typography>
       </Box>
+      <Progress />
       <Typography
         sx={{
           marginTop: '24px',
