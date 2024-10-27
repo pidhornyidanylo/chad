@@ -11,7 +11,8 @@ beforeEach(() => {
 
 describe('VerticalStepper component', () => {
   it('renders content properly', () => {
-    sessionStorage.setItem('currentStep', '0');
+    sessionStorage.setItem('submittedForms', '2');
+    sessionStorage.setItem('currentStep', '1');
     render(
       <FormContextProvider>
         <VerticalStepper />

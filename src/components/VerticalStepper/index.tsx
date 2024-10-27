@@ -6,6 +6,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Progress from '/public/icons/Progress.svg';
+import StoreExistsIcon from '/public/icons/StoreExists.svg';
 import NextIcon from '/public/icons/Next.svg';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useContext } from 'react';
@@ -24,46 +25,216 @@ const steps = [
   'Done',
 ];
 
-const StepIcon = ({
-  index,
-  activeStep,
-}: {
+type StepIconProps = {
   index: number;
-  activeStep: number;
-}) => (
+  storeInitExists: boolean;
+};
+
+const StepIcon: React.FC<StepIconProps> = ({
+  index,
+  storeInitExists,
+}: StepIconProps) => (
   <Box sx={{ position: 'relative', width: '32px', height: '32px' }}>
-    <CircleIcon
-      sx={{
-        position: 'absolute',
-        width: '32px',
-        height: '32px',
-        color: 'transparent',
-        border:
-          index <= activeStep
-            ? '2px solid var(--main-blue-light)'
-            : '2px solid var(--main-blue-faded)',
-        borderRadius: '50%',
-      }}
-    />
-    {index < activeStep && (
-      <Image
-        width={24}
-        height={24}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-        src={Progress}
-        alt={'progress-icon'}
-      />
+    {index < 4 && (
+      <>
+        {storeInitExists ? (
+          <InitialStoreExists index={index} />
+        ) : (
+          <InitialStoreNotExist index={index} />
+        )}
+      </>
     )}
   </Box>
 );
 
+const InitialStoreExists = ({ index }: { index: number }) => {
+  const { currentStep, submittedForms } = useContext(FormContext);
+  return (
+    <>
+      {index === 1 && currentStep < submittedForms && (
+        <IndexEqualsOneAndCurrentStepLessThenSubmittedForm />
+      )}
+      {index > currentStep ? (
+        <IndexLessThenCurrentStep />
+      ) : (
+        <IndexMoreThenCurrentStep index={index} />
+      )}
+    </>
+  );
+};
+
+const IndexEqualsOneAndCurrentStepLessThenSubmittedForm = () => (
+  <Image
+    width={23}
+    height={23}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    }}
+    src={StoreExistsIcon}
+    alt={'StoreExistsIcon-icon'}
+  />
+);
+
+const IndexLessThenCurrentStep = () => (
+  <CircleIcon
+    sx={{
+      position: 'absolute',
+      width: '32px',
+      height: '32px',
+      color: 'transparent',
+      border: '2px solid var(--main-blue-faded)',
+      borderRadius: '50%',
+    }}
+  />
+);
+
+const InitialStoreNotExist = ({ index }: { index: number }) => {
+  const { currentStep, submittedForms } = useContext(FormContext);
+
+  return (
+    <>
+      {index > currentStep ? (
+        <CircleIcon
+          sx={{
+            position: 'absolute',
+            width: '32px',
+            height: '32px',
+            color: 'transparent',
+            border: '2px solid var(--main-blue-faded)',
+            borderRadius: '50%',
+          }}
+        />
+      ) : (
+        <>
+          {index < submittedForms ? (
+            <>
+              {index < currentStep ? (
+                <Image
+                  width={32}
+                  height={32}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  src={Progress}
+                  alt={'progress-icon'}
+                />
+              ) : (
+                <>
+                  <Image
+                    width={23}
+                    height={23}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    src={Progress}
+                    alt={'progress-icon'}
+                  />
+                  <CircleIcon
+                    sx={{
+                      position: 'absolute',
+                      width: '32px',
+                      height: '32px',
+                      color: 'transparent',
+                      border: '2px solid var(--main-blue-light)',
+                      borderRadius: '50%',
+                    }}
+                  />
+                </>
+              )}
+            </>
+          ) : (
+            <CircleIcon
+              sx={{
+                position: 'absolute',
+                width: '32px',
+                height: '32px',
+                color: 'transparent',
+                border: '2px solid var(--main-blue-light)',
+                borderRadius: '50%',
+              }}
+            />
+          )}
+        </>
+      )}
+    </>
+  );
+};
+
+const IndexMoreThenCurrentStep = ({ index }: { index: number }) => {
+  const { currentStep, submittedForms } = useContext(FormContext);
+
+  return (
+    <>
+      {index < submittedForms ? (
+        <>
+          {index < currentStep ? (
+            <Image
+              width={32}
+              height={32}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+              src={Progress}
+              alt={'progress-icon'}
+            />
+          ) : (
+            <>
+              <Image
+                width={23}
+                height={23}
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+                src={Progress}
+                alt={'progress-icon'}
+              />
+              <CircleIcon
+                sx={{
+                  position: 'absolute',
+                  width: '32px',
+                  height: '32px',
+                  color: 'transparent',
+                  border: '2px solid var(--main-blue-light)',
+                  borderRadius: '50%',
+                }}
+              />
+            </>
+          )}
+        </>
+      ) : (
+        <CircleIcon
+          sx={{
+            position: 'absolute',
+            width: '32px',
+            height: '32px',
+            color: 'transparent',
+            border: '2px solid var(--main-blue-light)',
+            borderRadius: '50%',
+          }}
+        />
+      )}
+    </>
+  );
+};
+
 const VerticalStepper = () => {
-  const { currentStep, prevStep, nextStep } = useContext(FormContext);
+  const { currentStep, prevStep, nextStep, submittedForms, storeInitExists } =
+    useContext(FormContext);
 
   const handleNext = () => nextStep();
   const handleBack = () => prevStep();
@@ -79,7 +250,7 @@ const VerticalStepper = () => {
           <Step sx={stepStyles} key={step}>
             <StepLabel
               StepIconComponent={() => (
-                <StepIcon index={index} activeStep={currentStep} />
+                <StepIcon storeInitExists={storeInitExists} index={index} />
               )}
               sx={stepLabelStyles(index < currentStep)}
             >
@@ -104,7 +275,7 @@ const VerticalStepper = () => {
           Back
         </Button>
         <Button
-          disabled={currentStep === 4}
+          disabled={currentStep >= submittedForms}
           onClick={handleNext}
           sx={buttonStyles.button('next')}
         >

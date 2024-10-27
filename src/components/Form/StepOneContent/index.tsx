@@ -1,43 +1,36 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Image from 'next/image';
-import {
-  Box,
-  FormControl,
-  IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import ChadLogo from '/public/icons/ChadLogo.svg';
-import Link from 'next/link';
 import { FormContext } from '@/store/FormContext';
 import { useContext } from 'react';
+import { CustomPasswordInput } from './components/CustomPasswordInput';
+import { CustomFormControl } from './components/CustomFormControl';
 
-type FormValues = {
+export type FormValues = {
   email: string;
   yourName: string;
   password: string;
 };
 
-export function StepOneContent({
+type StepOneContentProps = {
+  register: UseFormRegister<FormValues>;
+  errors: FieldErrors<FormValues>;
+  showPassword: boolean;
+  showLoading: boolean;
+  onPasswordToggle: () => void;
+};
+
+export const StepOneContent: React.FC<StepOneContentProps> = ({
   register,
   errors,
   showPassword,
   onPasswordToggle,
-  showContinue,
   showLoading,
-}: {
-  register: UseFormRegister<FormValues>;
-  errors: FieldErrors<FormValues>;
-  showPassword: boolean;
-  showContinue: boolean;
-  showLoading: boolean;
-  onPasswordToggle: () => void;
-}) {
-  const { nextStep } = useContext(FormContext);
+}: StepOneContentProps) => {
+  const { nextStep, submittedForms } = useContext(FormContext);
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -70,6 +63,7 @@ export function StepOneContent({
         }}
       >
         <CustomFormControl
+          placeholder='megachad@trychad.com'
           label='Email'
           id='email'
           register={register}
@@ -80,8 +74,10 @@ export function StepOneContent({
           id='yourName'
           register={register}
           error={errors.yourName?.message}
+          placeholder={'Mega Chad'}
         />
         <CustomPasswordInput
+          placeholder={'Enter password'}
           label='Password'
           id='password'
           register={register}
@@ -94,7 +90,7 @@ export function StepOneContent({
         loading={showLoading}
         type='submit'
         onClick={() => {
-          if (showContinue) {
+          if (submittedForms > 0) {
             nextStep();
           }
         }}
@@ -109,7 +105,7 @@ export function StepOneContent({
           backgroundColor: 'var(--main-blue-light)',
         }}
       >
-        {showContinue ? 'Continue' : 'Create account'}
+        {submittedForms > 0 ? 'Continue' : 'Create account'}
       </LoadingButton>
       <Typography
         sx={{
@@ -117,136 +113,13 @@ export function StepOneContent({
           textTransform: 'none',
           marginTop: '16px',
           textAlign: 'center',
+          color: 'var(--typography-blue-dark)',
         }}
         variant='body2'
       >
         Already have an account?{' '}
-        <Link
-          style={{ textDecoration: 'none', color: 'var(--main-blue-light)' }}
-          href={'/'}
-        >
-          Login
-        </Link>
+        <Button sx={{ textTransform: 'none', color: '#32ABF2' }}>Login</Button>
       </Typography>
     </>
   );
-}
-
-function CustomFormControl({
-  label,
-  id,
-  register,
-  error,
-}: {
-  label: string;
-  id: keyof FormValues;
-  register: UseFormRegister<FormValues>;
-  error: string | undefined;
-}) {
-  return (
-    <FormControl sx={{ position: 'relative' }} fullWidth variant='standard'>
-      <InputLabel
-        sx={{
-          top: '-10px',
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-        }}
-        htmlFor={id}
-        shrink
-      >
-        {label}
-      </InputLabel>
-      <Input
-        disableUnderline
-        sx={{
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          backgroundColor: '#F8F9FC',
-          padding: '10px  10px 10px 17px',
-          borderRadius: '4px',
-        }}
-        fullWidth
-        id={id}
-        {...register(id)}
-      />
-      {error && (
-        <Typography
-          sx={{
-            position: 'absolute',
-            bottom: '-30px',
-            color: 'red',
-          }}
-          variant='caption'
-        >
-          {error}
-        </Typography>
-      )}
-    </FormControl>
-  );
-}
-
-function CustomPasswordInput({
-  label,
-  id,
-  register,
-  error,
-  showPassword,
-  onToggleShowPassword,
-}: {
-  label: string;
-  id: keyof FormValues;
-  register: UseFormRegister<FormValues>;
-  error: string | undefined;
-  showPassword: boolean;
-  onToggleShowPassword: () => void;
-}) {
-  return (
-    <FormControl sx={{ position: 'relative' }} fullWidth variant='standard'>
-      <InputLabel
-        sx={{
-          top: '-10px',
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          marginBottom: '8px',
-        }}
-        htmlFor={id}
-        shrink
-      >
-        {label}
-      </InputLabel>
-      <Input
-        disableUnderline
-        fullWidth
-        id={id}
-        sx={{
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          backgroundColor: '#F8F9FC',
-          padding: '10px  10px 10px 17px',
-          borderRadius: '4px',
-        }}
-        type={showPassword ? 'text' : 'password'}
-        {...register(id)}
-        endAdornment={
-          <InputAdornment position='end'>
-            <IconButton onClick={onToggleShowPassword}>
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        }
-      />
-      {error && (
-        <Typography
-          sx={{
-            position: 'absolute',
-            bottom: '-30px',
-            color: 'red',
-          }}
-          variant='caption'
-        >
-          {error}
-        </Typography>
-      )}
-    </FormControl>
-  );
-}
+};

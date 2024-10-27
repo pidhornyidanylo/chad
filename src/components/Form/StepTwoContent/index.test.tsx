@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { StepTwoContent } from '.';
 
 describe('StepTwoContent component', () => {
   it('reders content properly', () => {
-    render(<StepTwoContent />);
+    render(<StepTwoContent showLoading={false} />);
     const heading = screen.getByRole('heading', {
       name: /chad/i,
     });
@@ -36,7 +36,7 @@ describe('StepTwoContent component', () => {
     const button = screen.getByRole('button', {
       name: /connect store/i,
     });
-    const link = screen.getByRole('link', {
+    const button1 = screen.getByRole('button', {
       name: /i don't use shopify/i,
     });
     expect(heading).toBeInTheDocument();
@@ -49,6 +49,57 @@ describe('StepTwoContent component', () => {
     expect(stackPaperText3).toBeInTheDocument();
     expect(stackTypo3).toBeInTheDocument();
     expect(button).toBeInTheDocument();
-    expect(link).toBeInTheDocument();
+    expect(button1).toBeInTheDocument();
+  });
+  it('shows alternative tab after clicking button', () => {
+    render(<StepTwoContent showLoading={false} />);
+    const button1 = screen.getByRole('button', {
+      name: /i don't use shopify/i,
+    });
+    expect(button1).toBeInTheDocument();
+    fireEvent.click(button1);
+    const heading = screen.getByRole('heading', {
+      name: /don't use shopify\?/i,
+    });
+    const subText = screen.getByText(
+      /chad beta is currently only available on shopify\. we`ll send you an email when chad becomes available on your platform\./i
+    );
+    const platformLabel = screen.getByRole('heading', {
+      name: /platform/i,
+    });
+    const select = screen.getByRole('combobox');
+    const submitButton = screen.getByRole('button', {
+      name: /submit/i,
+    });
+    const actuallyConnectButton = screen.getByRole('button', {
+      name: /connect/i,
+    });
+    expect(heading).toBeInTheDocument();
+    expect(subText).toBeInTheDocument();
+    expect(platformLabel).toBeInTheDocument();
+    expect(select).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
+    expect(actuallyConnectButton).toBeInTheDocument();
+  });
+  it('show success tab after clicking submit', () => {
+    render(<StepTwoContent showLoading={false} />);
+    const button1 = screen.getByRole('button', {
+      name: /i don't use shopify/i,
+    });
+    expect(button1).toBeInTheDocument();
+    fireEvent.click(button1);
+    const submitButton = screen.getByRole('button', {
+      name: /submit/i,
+    });
+    expect(submitButton).toBeInTheDocument();
+    fireEvent.click(submitButton);
+    const receivedResponse = screen.getByRole('heading', {
+      name: /response received/i,
+    });
+    const doneButton = screen.getByRole('button', {
+      name: /done/i,
+    });
+    expect(receivedResponse).toBeInTheDocument();
+    expect(doneButton).toBeInTheDocument();
   });
 });

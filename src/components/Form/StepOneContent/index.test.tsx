@@ -28,7 +28,6 @@ describe('StepOneContent component', () => {
         register={mockRegister}
         errors={mockErrors}
         showPassword={showPassword}
-        showContinue={showContinue}
         showLoading={showLoading}
         onPasswordToggle={() => {}}
       />
@@ -49,12 +48,6 @@ describe('StepOneContent component', () => {
 
     const passwordInput = screen.getByLabelText(/password/i);
     expect(passwordInput).toHaveAttribute('type', 'text');
-  });
-  it('toggles button text based on showContinue prop', () => {
-    setup({ showContinue: true });
-
-    const button = screen.getByRole('button', { name: /continue/i });
-    expect(button).toBeInTheDocument();
   });
 
   it('displays loading indicator when showLoading is true', () => {
