@@ -3,13 +3,17 @@
 scenario #1 (have to connect to Shopify manually)
 
 --- email: test@gmail.com
+
 --- yourName: test
+
 --- password: 1234QQQaaa!
 
 scenario #2 (no need to connect to Shopify manually)
 
 --- email: exists@gmail.com
+
 --- yourName: exists
+
 --- password: 1234QQQaaa!
 
 # Data storage
