@@ -41,7 +41,8 @@ const ResetButton = () => {
 export default ResetButton;
 
 const resetButtonStyles = {
-  position: 'fixed',
+  position: 'absolute',
+  zIndex: 5,
   top: '10px',
   right: '10px',
   '@media (max-width: 576px)': {
@@ -50,8 +51,10 @@ const resetButtonStyles = {
 };
 
 const iconButtonStyles = {
-  position: 'fixed',
+  position: 'absolute',
   top: '10px',
+  display: 'block',
+  zIndex: '2',
   right: '10px',
   '@media (min-width: 576px)': {
     display: 'none',

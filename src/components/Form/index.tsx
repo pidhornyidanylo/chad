@@ -1,5 +1,5 @@
 'use client';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { z } from 'zod';
 import { FormDataSchema } from './shema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +16,7 @@ import { redirect } from 'next/navigation';
 import { Typography } from '@mui/material';
 import toast from 'react-hot-toast';
 import { FormContext } from '@/store/FormContext/FormContext';
+import gsap from 'gsap';
 
 export type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -130,10 +131,23 @@ const Form = () => {
     setShowLoading(false);
   };
 
+  const boxRef = useRef<HTMLFormElement | null>(null);
+  useEffect(() => {
+    gsap.from(boxRef.current, {
+      scale: 1.02,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  }, [currentStep]);
+
   return (
     <section>
       {currentStep <= 2 && (
-        <form className={styles.form} onSubmit={handleSubmit(processForm)}>
+        <form
+          ref={boxRef}
+          className={styles.form}
+          onSubmit={handleSubmit(processForm)}
+        >
           {currentStep === 0 && (
             <StepOneContent
               showLoading={showLoading}
