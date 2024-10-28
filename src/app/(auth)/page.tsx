@@ -1,9 +1,9 @@
 import React from 'react';
 import VerticalStepper from '@/components/VerticalStepper';
 import Form from '@/components/Form';
-import { FormContextProvider } from '@/store/FormContext';
 import ResetButton from '@/components/ReserButton/ResetButton';
 import HorizontalStepper from '@/components/HorizontalStepper/HorizontalStepper';
+import { FormContextProvider } from '@/store/FormContext/FormContext';
 import styles from './page.module.css';
 
 const Auth = () => {

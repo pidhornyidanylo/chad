@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import VerticalStepper from '.';
-import { FormContextProvider } from '@/store/FormContext';
+import { FormContextProvider } from '@/store/FormContext/FormContext';
 
 beforeEach(() => {
   sessionStorage.clear();

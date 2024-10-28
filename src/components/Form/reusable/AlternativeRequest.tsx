@@ -41,32 +41,18 @@ const AlternativeRequest = ({
           Chad
         </Typography>
       </Box>
-      <Typography
-        sx={{
-          marginTop: '24px',
-          color: '#20496C',
-          fontWeight: 500,
-        }}
-        variant='h5'
-      >
+      <Typography sx={typoH5Styles} variant='h5'>
         Don&apos;t use {platform}?
       </Typography>
       <Typography sx={{ marginTop: '16px', color: '#20496C' }} variant='body2'>
         {template}
       </Typography>
-      <Typography
-        sx={{
-          marginTop: '36px',
-          marginBottom: '8px',
-          color: '#20496C',
-        }}
-        variant='subtitle1'
-      >
+      <Typography sx={typoSubtitle1Styles} variant='subtitle1'>
         Platform
       </Typography>
       <FormControl fullWidth>
         <Select
-          sx={{ backgroundColor: '#F8F9FC', border: 'none' }}
+          sx={selectStyles}
           labelId='demo-simple-select-label'
           id='demo-simple-select'
           value={state}
@@ -83,31 +69,15 @@ const AlternativeRequest = ({
         variant='contained'
         onClick={() => handleSuccessForm(true)}
         fullWidth
-        sx={{
-          fontWeight: 300,
-          textTransform: 'none',
-          borderRadius: '8px',
-          marginTop: '32px',
-          padding: '11px 0',
-          backgroundColor: 'var(--main-blue-light)',
-        }}
+        sx={submitButtonStyles}
       >
         Submit
       </Button>
-      <Typography
-        sx={{
-          fontWeight: 300,
-          textTransform: 'none',
-          marginTop: '16px',
-          textAlign: 'center',
-          color: 'var(--typography-blue-dark)',
-        }}
-        variant='body2'
-      >
+      <Typography sx={typoBody2Styles} variant='body2'>
         Actually use {platform}?
         <Button
           onClick={() => toggleShowAlternative()}
-          sx={{ textTransform: 'none', color: '#32ABF2' }}
+          sx={connectButtonStyles}
         >
           Connect
         </Button>
@@ -117,3 +87,39 @@ const AlternativeRequest = ({
 };
 
 export default AlternativeRequest;
+
+const selectStyles = { backgroundColor: '#F8F9FC', border: 'none' };
+
+const typoH5Styles = {
+  marginTop: '24px',
+  color: '#20496C',
+  fontWeight: 500,
+};
+
+const typoBody2Styles = {
+  fontWeight: 300,
+  textTransform: 'none',
+  marginTop: '16px',
+  textAlign: 'center',
+  color: 'var(--typography-blue-dark)',
+};
+
+const typoSubtitle1Styles = {
+  marginTop: '36px',
+  marginBottom: '8px',
+  color: '#20496C',
+};
+
+const connectButtonStyles = {
+  textTransform: 'none',
+  color: '#32ABF2',
+};
+
+const submitButtonStyles = {
+  fontWeight: 300,
+  textTransform: 'none',
+  borderRadius: '8px',
+  marginTop: '32px',
+  padding: '11px 0',
+  backgroundColor: 'var(--main-blue-light)',
+};

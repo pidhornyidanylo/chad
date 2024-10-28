@@ -16,18 +16,7 @@ const SuccessForm: React.FC<SuccessFormProps> = ({
         src={CheckMark}
         alt={'check-mark'}
       />
-      <Typography
-        sx={{
-          marginTop: '24px',
-          color: '#20496C',
-          fontWeight: 500,
-          textAlign: 'center',
-          '@media (max-width: 576px)': {
-            marginTop: '12px',
-          },
-        }}
-        variant='h5'
-      >
+      <Typography sx={typoH5Styles} variant='h5'>
         Response received
       </Typography>
       <Typography
@@ -45,14 +34,7 @@ const SuccessForm: React.FC<SuccessFormProps> = ({
         variant='contained'
         onClick={() => handleSuccessForm(false)}
         fullWidth
-        sx={{
-          fontWeight: 300,
-          textTransform: 'none',
-          borderRadius: '8px',
-          marginTop: '32px',
-          padding: '11px 0',
-          backgroundColor: 'var(--main-blue-light)',
-        }}
+        sx={doneButtonStyles}
       >
         Done
       </Button>
@@ -61,3 +43,22 @@ const SuccessForm: React.FC<SuccessFormProps> = ({
 };
 
 export default SuccessForm;
+
+const typoH5Styles = {
+  marginTop: '24px',
+  color: '#20496C',
+  fontWeight: 500,
+  textAlign: 'center',
+  '@media (max-width: 576px)': {
+    marginTop: '12px',
+  },
+};
+
+const doneButtonStyles = {
+  fontWeight: 300,
+  textTransform: 'none',
+  borderRadius: '8px',
+  marginTop: '32px',
+  padding: '11px 0',
+  backgroundColor: 'var(--main-blue-light)',
+};

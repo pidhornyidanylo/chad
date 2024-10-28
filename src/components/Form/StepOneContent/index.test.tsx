@@ -18,11 +18,7 @@ describe('StepOneContent component', () => {
     password: { type: 'minLength', message: 'Password is too short' },
   };
 
-  const setup = ({
-    showPassword = false,
-    showLoading = false,
-    showContinue = false,
-  } = {}) =>
+  const setup = ({ showPassword = false, showLoading = false } = {}) =>
     render(
       <StepOneContent
         register={mockRegister}

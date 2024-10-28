@@ -20,7 +20,7 @@ type CustomPasswordInputProps = {
   onToggleShowPassword: () => void;
 };
 
-export const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
+const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
   label,
   id,
   register,
@@ -31,16 +31,7 @@ export const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
 }: CustomPasswordInputProps) => {
   return (
     <FormControl sx={{ position: 'relative' }} fullWidth variant='standard'>
-      <InputLabel
-        sx={{
-          top: '-10px',
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          marginBottom: '8px',
-        }}
-        htmlFor={id}
-        shrink
-      >
+      <InputLabel sx={inputLabelStyles} htmlFor={id} shrink>
         {label}
       </InputLabel>
       <Input
@@ -48,13 +39,7 @@ export const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
         disableUnderline
         fullWidth
         id={id}
-        sx={{
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          backgroundColor: '#F8F9FC',
-          padding: '10px  10px 10px 17px',
-          borderRadius: '4px',
-        }}
+        sx={inputStyles}
         type={showPassword ? 'text' : 'password'}
         {...register(id)}
         endAdornment={
@@ -66,20 +51,33 @@ export const CustomPasswordInput: React.FC<CustomPasswordInputProps> = ({
         }
       />
       {error && (
-        <Typography
-          sx={{
-            position: 'absolute',
-            bottom: '-30px',
-            color: 'red',
-            '@media (max-width: 576px)': {
-              bottom: '-20px',
-            },
-          }}
-          variant='caption'
-        >
+        <Typography sx={typoErrorStyles} variant='caption'>
           {error}
         </Typography>
       )}
     </FormControl>
   );
+};
+
+export default CustomPasswordInput;
+
+const inputLabelStyles = {
+  top: '-10px',
+  fontSize: '1.2em',
+  color: 'var(--typography-blue-dark)',
+  marginBottom: '8px',
+};
+
+const inputStyles = {
+  fontSize: '1.2em',
+  color: 'var(--typography-blue-dark)',
+  backgroundColor: '#F8F9FC',
+  padding: '10px  10px 10px 17px',
+  borderRadius: '4px',
+};
+
+const typoErrorStyles = {
+  position: 'absolute',
+  bottom: '-30px',
+  color: 'red',
 };

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { FormContext } from '@/store/FormContext';
-import { InitNotConnectedStore } from './components/InitNotConnectedStore';
 import { InitiallyConnectedStore } from './components/InitConnectedStore';
 import ManuallyConnectedStore from './components/ManuallyConnectedStore';
+import { FormContext } from '@/store/FormContext/FormContext';
+import { InitNotConnectedStore } from './components/InitNotConnectedStore/InitNotConnectedStore';
 
 type StepTwoContentProps = {
   showLoading: boolean;

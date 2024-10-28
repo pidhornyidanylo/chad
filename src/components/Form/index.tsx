@@ -1,5 +1,5 @@
 'use client';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { z } from 'zod';
 import { FormDataSchema } from './shema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +8,6 @@ import styles from './style.module.css';
 import { StepOneContent } from './StepOneContent';
 import { StepTwoContent } from './StepTwoContent';
 import { StepThreeContent } from './StepThreeContent';
-import { FormContext } from '@/store/FormContext';
 import {
   simulateFirstFormServerResponse,
   simulateFormServerResponse,
@@ -16,6 +15,7 @@ import {
 import { redirect } from 'next/navigation';
 import { Typography } from '@mui/material';
 import toast from 'react-hot-toast';
+import { FormContext } from '@/store/FormContext/FormContext';
 
 export type Inputs = z.infer<typeof FormDataSchema>;
 

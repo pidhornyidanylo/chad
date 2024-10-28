@@ -1,29 +1,52 @@
 import { FieldError } from 'react-hook-form';
 import { FormDataSchema } from './shema';
 import { Inputs } from '.';
+import { SafeParseReturnType } from 'zod';
+
+type Result = SafeParseReturnType<
+  {
+    yourName: string;
+    email: string;
+    password: string;
+  },
+  {
+    yourName: string;
+    email: string;
+    password: string;
+  }
+>;
+
+type Data = {
+  yourName: string;
+  email: string;
+  password: string;
+};
+
+const storeNotExistCaseValidated = (result: Result, data: Data) =>
+  result.success &&
+  data.email === 'test@gmail.com' &&
+  data.yourName === 'test' &&
+  data.password === '1234QQQaaa!';
+
+const storeExistsCaseValidated = (result: Result, data: Data) =>
+  result.success &&
+  data.email === 'exists@gmail.com' &&
+  data.yourName === 'exists' &&
+  data.password === '1234QQQaaa!';
 
 export const simulateFirstFormServerResponse = async (data: Inputs) => {
   const result = FormDataSchema.safeParse(data);
+
   return new Promise<{
     success: boolean;
     store: boolean;
     errors?: Record<string, FieldError>;
   }>((resolve) => {
     setTimeout(() => {
-      if (
-        result.success &&
-        data.email === 'test@gmail.com' &&
-        data.yourName === 'test' &&
-        data.password === '1234QQQaaa!'
-      ) {
+      if (storeNotExistCaseValidated(result, data)) {
         resolve({ success: true, store: false });
         sessionStorage.setItem('userData', JSON.stringify(data));
-      } else if (
-        result.success &&
-        data.email === 'exists@gmail.com' &&
-        data.yourName === 'exists' &&
-        data.password === '1234QQQaaa!'
-      ) {
+      } else if (storeExistsCaseValidated(result, data)) {
         resolve({ success: true, store: true });
         sessionStorage.setItem('userData', JSON.stringify(data));
       } else {
@@ -34,7 +57,6 @@ export const simulateFirstFormServerResponse = async (data: Inputs) => {
             message: err.message,
           };
         });
-        console.log('error');
         resolve({
           success: false,
           store: false,

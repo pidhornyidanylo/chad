@@ -2,77 +2,43 @@ import * as React from 'react';
 import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import { Box, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
-import { FormContext } from '@/store/FormContext';
+import { useContext } from 'react';
+import { FormContext } from '@/store/FormContext/FormContext';
 
 const Progress = () => {
   const { currentStep, submittedForms, nextStep, prevStep } =
     useContext(FormContext);
-  const [activeStep, setActiveStep] = useState(currentStep);
   const handleNext = () => {
-    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     nextStep();
   };
 
   const handleBack = () => {
-    // setActiveStep((prevActiveStep) => prevActiveStep - 1);
     prevStep();
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'start',
-        mt: 3,
-      }}
-    >
+    <Box sx={containerBoxStyles}>
       <Typography
         variant='body2'
         sx={{ mb: 0.7, color: 'var(--typography-blue-dark)' }}
       >
-        Step {activeStep + 1} of 4
+        Step {currentStep + 1} of 4
       </Typography>
       <MobileStepper
         variant='progress'
         steps={4}
         position='static'
-        activeStep={activeStep}
-        sx={{
-          padding: 0,
-          width: '100%',
-          bgcolor: 'transparent',
-          '& .MuiMobileStepper-progress': {
-            width: '100%',
-            backgroundColor: 'transparent',
-            border: '1px solid #C9D3E0',
-            borderRadius: '4px',
-            height: '8px',
-          },
-          '& .MuiLinearProgress-bar': {
-            backgroundColor: '#C9D3E0',
-            borderRadius: '4px',
-          },
-        }}
+        activeStep={currentStep}
+        sx={mobileStepperStyles}
         backButton={null}
         nextButton={null}
       />
       {submittedForms > 0 ? (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            maxWidth: 400,
-            mt: 1,
-          }}
-        >
+        <Box sx={buttonsBoxContainerStyles}>
           <Button
             size='small'
             onClick={handleBack}
-            disabled={activeStep === 0}
+            disabled={currentStep === 0}
             sx={{ color: 'var(--typography-blue-dark)' }}
           >
             Prev
@@ -80,7 +46,7 @@ const Progress = () => {
           <Button
             size='small'
             onClick={handleNext}
-            disabled={activeStep === 2 || activeStep >= submittedForms}
+            disabled={currentStep === 2 || currentStep >= submittedForms}
             sx={{ color: 'var(--typography-blue-dark)' }}
           >
             Next
@@ -94,3 +60,36 @@ const Progress = () => {
 };
 
 export default Progress;
+
+const containerBoxStyles = {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'start',
+  mt: 3,
+};
+
+const mobileStepperStyles = {
+  padding: 0,
+  width: '100%',
+  bgcolor: 'transparent',
+  '& .MuiMobileStepper-progress': {
+    width: '100%',
+    backgroundColor: 'transparent',
+    border: '1px solid #C9D3E0',
+    borderRadius: '4px',
+    height: '8px',
+  },
+  '& .MuiLinearProgress-bar': {
+    backgroundColor: '#C9D3E0',
+    borderRadius: '4px',
+  },
+};
+
+const buttonsBoxContainerStyles = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+  maxWidth: 400,
+  mt: 1,
+};

@@ -22,14 +22,7 @@ const ResetButton = () => {
       <Button
         onClick={() => handleFormReset()}
         variant='outlined'
-        sx={{
-          position: 'fixed',
-          top: '10px',
-          right: '10px',
-          '@media (max-width: 576px)': {
-            display: 'none',
-          },
-        }}
+        sx={resetButtonStyles}
       >
         Reset
       </Button>
@@ -37,14 +30,7 @@ const ResetButton = () => {
         color='primary'
         aria-label='reload'
         onClick={() => handleFormReset()}
-        sx={{
-          position: 'fixed',
-          top: '10px',
-          right: '10px',
-          '@media (min-width: 576px)': {
-            display: 'none',
-          },
-        }}
+        sx={iconButtonStyles}
       >
         <ReplayIcon />
       </IconButton>
@@ -53,3 +39,21 @@ const ResetButton = () => {
 };
 
 export default ResetButton;
+
+const resetButtonStyles = {
+  position: 'fixed',
+  top: '10px',
+  right: '10px',
+  '@media (max-width: 576px)': {
+    display: 'none',
+  },
+};
+
+const iconButtonStyles = {
+  position: 'fixed',
+  top: '10px',
+  right: '10px',
+  '@media (min-width: 576px)': {
+    display: 'none',
+  },
+};

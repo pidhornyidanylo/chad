@@ -3,10 +3,10 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Image from 'next/image';
 import { Box, Button, Typography } from '@mui/material';
 import ChadLogo from '/public/icons/ChadLogo.svg';
-import { FormContext } from '@/store/FormContext';
+import { FormContext } from '@/store/FormContext/FormContext';
 import { useContext } from 'react';
-import { CustomPasswordInput } from './components/CustomPasswordInput';
-import { CustomFormControl } from './components/CustomFormControl';
+import CustomPasswordInput from './components/CustomPasswordInput';
+import CustomFormControl from './components/CustomFormControl';
 import Progress from '@/components/Progress/Progress';
 
 export type FormValues = {
@@ -49,7 +49,7 @@ export const StepOneContent: React.FC<StepOneContentProps> = ({
       <Box
         sx={{
           display: 'none',
-          '@media(max-width: 576px)': {
+          '@media(max-width: 1200px)': {
             display: 'block',
           },
         }}
@@ -71,14 +71,7 @@ export const StepOneContent: React.FC<StepOneContentProps> = ({
         to manage orders and track shipments 24/7 without driving you crazy.
       </Typography>
 
-      <Box
-        sx={{
-          marginTop: '42px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '50px',
-        }}
-      >
+      <Box sx={componentsContainerBoxStyles}>
         <CustomFormControl
           placeholder='megachad@trychad.com'
           label='Email'
@@ -113,30 +106,38 @@ export const StepOneContent: React.FC<StepOneContentProps> = ({
         }}
         variant='contained'
         fullWidth
-        sx={{
-          fontWeight: 300,
-          textTransform: 'none',
-          borderRadius: '8px',
-          marginTop: '52px',
-          padding: '11px 0',
-          backgroundColor: 'var(--main-blue-light)',
-        }}
+        sx={loadingButtonStyles}
       >
         {submittedForms > 0 ? 'Continue' : 'Create account'}
       </LoadingButton>
-      <Typography
-        sx={{
-          fontWeight: 300,
-          textTransform: 'none',
-          marginTop: '16px',
-          textAlign: 'center',
-          color: 'var(--typography-blue-dark)',
-        }}
-        variant='body2'
-      >
+      <Typography sx={typoBody2Styles} variant='body2'>
         Already have an account?{' '}
         <Button sx={{ textTransform: 'none', color: '#32ABF2' }}>Login</Button>
       </Typography>
     </>
   );
+};
+
+const componentsContainerBoxStyles = {
+  marginTop: '42px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '50px',
+};
+
+const typoBody2Styles = {
+  fontWeight: 300,
+  textTransform: 'none',
+  marginTop: '16px',
+  textAlign: 'center',
+  color: 'var(--typography-blue-dark)',
+};
+
+const loadingButtonStyles = {
+  fontWeight: 300,
+  textTransform: 'none',
+  borderRadius: '8px',
+  marginTop: '52px',
+  padding: '11px 0',
+  backgroundColor: 'var(--main-blue-light)',
 };

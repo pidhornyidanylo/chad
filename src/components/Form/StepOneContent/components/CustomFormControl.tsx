@@ -10,7 +10,7 @@ type CustomFormControlProps = {
   error: string | undefined;
 };
 
-export const CustomFormControl: React.FC<CustomFormControlProps> = ({
+const CustomFormControl: React.FC<CustomFormControlProps> = ({
   label,
   placeholder,
   id,
@@ -19,43 +19,44 @@ export const CustomFormControl: React.FC<CustomFormControlProps> = ({
 }: CustomFormControlProps) => {
   return (
     <FormControl sx={{ position: 'relative' }} fullWidth variant='standard'>
-      <InputLabel
-        sx={{
-          top: '-10px',
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-        }}
-        htmlFor={id}
-        shrink
-      >
+      <InputLabel sx={inputLabelStyles} htmlFor={id} shrink>
         {label}
       </InputLabel>
       <Input
         placeholder={placeholder}
         disableUnderline
-        sx={{
-          fontSize: '1.2em',
-          color: 'var(--typography-blue-dark)',
-          backgroundColor: '#F8F9FC',
-          padding: '10px  10px 10px 17px',
-          borderRadius: '4px',
-        }}
+        sx={inputStyles}
         fullWidth
         id={id}
         {...register(id)}
       />
       {error && (
-        <Typography
-          sx={{
-            position: 'absolute',
-            bottom: '-30px',
-            color: 'red',
-          }}
-          variant='caption'
-        >
+        <Typography sx={typoErrorStyles} variant='caption'>
           {error}
         </Typography>
       )}
     </FormControl>
   );
+};
+
+export default CustomFormControl;
+
+const inputLabelStyles = {
+  top: '-10px',
+  fontSize: '1.2em',
+  color: 'var(--typography-blue-dark)',
+};
+
+const inputStyles = {
+  fontSize: '1.2em',
+  color: 'var(--typography-blue-dark)',
+  backgroundColor: '#F8F9FC',
+  padding: '10px  10px 10px 17px',
+  borderRadius: '4px',
+};
+
+const typoErrorStyles = {
+  position: 'absolute',
+  bottom: '-30px',
+  color: 'red',
 };

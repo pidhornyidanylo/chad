@@ -31,9 +31,9 @@ export const CustomStepConnector = styled(StepConnector)(() => ({
   },
 }));
 
-export const stepLabelStyles = (completed: boolean) => ({
+export const stepLabelStyles = () => ({
   [`& .MuiStepLabel-label`]: {
-    color: completed ? '#fff' : 'var(--main-blue-faded)',
+    color: 'var(--main-blue-faded)',
     fontWeight: 'regular',
     fontSize: '1em',
     padding: 0,

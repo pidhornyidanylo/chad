@@ -15,17 +15,7 @@ const HorizontalStepper = () => {
     <Box
       sx={{ position: 'absolute', bottom: '56px', maxWidth: 400, flexGrow: 1 }}
     >
-      <Box
-        sx={{
-          borderRadius: '4px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-          padding: '16px',
-          backgroundColor: '#134267',
-          marginBottom: '16px',
-        }}
-      >
+      <Box sx={textContentBoxContainer}>
         <Box sx={{ color: '#96CAF7', fontSize: '2em' }}>{activeStep + 1}X</Box>
         <Typography sx={{ color: '#96CAF7' }}>
           Acquiring a new customer is {activeStep + 1}x more costly than making
@@ -46,14 +36,7 @@ const HorizontalStepper = () => {
           <Box
             key={index}
             onClick={() => handleStepChange(index)}
-            sx={{
-              width: 10,
-              height: 10,
-              borderRadius: '50%',
-              backgroundColor: activeStep === index ? '#96CAF7' : '#134267',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s',
-            }}
+            sx={dotStyles(activeStep, index)}
           />
         ))}
       </Box>
@@ -62,3 +45,24 @@ const HorizontalStepper = () => {
 };
 
 export default HorizontalStepper;
+
+const dotStyles = (activeStep: number, index: number) => {
+  return {
+    width: 10,
+    height: 10,
+    borderRadius: '50%',
+    backgroundColor: activeStep === index ? '#96CAF7' : '#134267',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  };
+};
+
+const textContentBoxContainer = {
+  borderRadius: '4px',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '16px',
+  padding: '16px',
+  backgroundColor: '#134267',
+  marginBottom: '16px',
+};
