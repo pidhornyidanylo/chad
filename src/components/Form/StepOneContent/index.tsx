@@ -31,11 +31,11 @@ export const StepOneContent: React.FC<StepOneContentProps> = ({
   showLoading,
 }: StepOneContentProps) => {
   const { nextStep, submittedForms } = useContext(FormContext);
-
   return (
     <>
       <Box
         sx={{
+          transition: 'all .2s ease',
           display: 'flex',
           alignItems: 'center',
           gap: 1,

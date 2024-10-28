@@ -20,6 +20,8 @@
 .typography {
   position: relative;
   z-index: 1;
+  font-weight: 2em;
+  text-align: center;
   font-weight: 700;
   color: #fff;
 }

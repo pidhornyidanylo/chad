@@ -7,6 +7,7 @@ import { FormContext } from '@/store/FormContext/FormContext';
 
 export const InitiallyConnectedStore = () => {
   const { nextStep } = useContext(FormContext);
+
   return (
     <>
       <Box sx={boxContainerStyles}>
