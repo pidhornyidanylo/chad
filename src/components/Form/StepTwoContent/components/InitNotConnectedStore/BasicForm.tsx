@@ -121,6 +121,7 @@ const paperStyles = {
   boxShadow: 'none',
   display: 'flex',
   gap: '8px',
+  backgroundColor: 'inherit',
 };
 
 const stackStyles = {
@@ -128,4 +129,8 @@ const stackStyles = {
   flexDirection: 'column',
   gap: '16px',
   marginTop: '32px',
+  '@media (max-width: 576px)': {
+    backgroundColor: '#F8F9FC',
+    padding: 2,
+  },
 };

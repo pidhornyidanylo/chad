@@ -1,5 +1,5 @@
 'use client';
-import { reset } from '@/components/ReserButton/ResetButton';
+import { reset } from '@/components/ResetButton/ResetButton';
 import { Typography } from '@mui/material';
 import React, { useEffect, useRef } from 'react';
 import styles from './page.module.css';

@@ -17,7 +17,9 @@ export const StepThreeContent: React.FC<StepThreeContentProps> = ({
 }: StepThreeContentProps) => {
   useEffect(() => {
     if (errors.email?.message || errors.password?.message) {
-      toast.error('Form reset is required.');
+      toast.error(
+        'Please reset the form or re-enter your information to move forward.'
+      );
     }
   }, [errors]);
 

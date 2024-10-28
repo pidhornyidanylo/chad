@@ -23,6 +23,7 @@ const HorizontalStepper = () => {
         </Typography>
       </Box>
       <MobileStepper
+        data-testid='mobileStepper'
         variant='dots'
         steps={totalSteps}
         position='static'

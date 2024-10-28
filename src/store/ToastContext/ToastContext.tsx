@@ -1,14 +1,14 @@
 'use client';
-
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { Toaster, ToastPosition } from 'react-hot-toast';
 
 type ToastContextType = {
   position: ToastPosition;
-  setPosition: (position: ToastPosition) => void;
 };
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
+export const ToastContext = createContext<ToastContextType>({
+  position: 'bottom-right',
+});
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -16,28 +16,22 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   const [position, setPosition] = useState<ToastPosition>('bottom-right');
   useEffect(() => {
     const handleResize = () => {
-      const isSmallScreen = window.matchMedia('(max-width: 576px)').matches;
-      setPosition(isSmallScreen ? 'top-center' : 'bottom-right');
+      if (window.innerWidth < 576) {
+        setPosition('top-center');
+      } else {
+        setPosition('bottom-right');
+      }
     };
 
     handleResize();
-
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <ToastContext.Provider value={{ position, setPosition }}>
+    <ToastContext.Provider value={{ position }}>
       {children}
       <Toaster position={position} />
     </ToastContext.Provider>
   );
-};
-
-export const useToastPosition = () => {
-  const context = useContext(ToastContext);
-  if (!context)
-    throw new Error('useToastPosition must be used within a ToastProvider');
-  return context;
 };

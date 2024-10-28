@@ -115,6 +115,10 @@ const stackStyles = {
   flexDirection: 'column',
   gap: '16px',
   marginTop: '32px',
+  '@media (max-width: 576px)': {
+    backgroundColor: '#F8F9FC',
+    padding: 2,
+  },
 };
 
 const paperStyles = {
@@ -122,6 +126,7 @@ const paperStyles = {
   boxShadow: 'none',
   display: 'flex',
   gap: '8px',
+  backgroundColor: 'inherit',
 };
 
 const loadingButtonStyles = {

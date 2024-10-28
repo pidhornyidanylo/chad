@@ -1,7 +1,7 @@
 import React from 'react';
 import VerticalStepper from '@/components/VerticalStepper';
 import Form from '@/components/Form';
-import ResetButton from '@/components/ReserButton/ResetButton';
+import ResetButton from '@/components/ResetButton/ResetButton';
 import HorizontalStepper from '@/components/HorizontalStepper/HorizontalStepper';
 import { FormContextProvider } from '@/store/FormContext/FormContext';
 import styles from './page.module.css';
